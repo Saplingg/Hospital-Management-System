@@ -58,7 +58,8 @@ namespace Hospital_Management_System
             => MainFrame.Content = new DoctorPage();
 
         private void BtnAppointments_Click(object sender, RoutedEventArgs e)
-            => MainFrame.Content = new AppointmentPage();
+        => MainFrame.Content = new AppointmentPage();
+
 
         private void BtnBilling_Click(object sender, RoutedEventArgs e)
             => MainFrame.Content = new BillingPage();

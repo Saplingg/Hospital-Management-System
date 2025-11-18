@@ -26,5 +26,16 @@ namespace Hospital_Management_System.DAL
             dbContext = new HospitalManagementDbContext();
             return dbContext.Medicines.Find(id);
         }
+        public void AddMedicine(Medicine medicine) {
+            dbContext = new();
+            dbContext.Medicines.Add(medicine);
+            dbContext.SaveChanges();
+        }
+        public void UpdateMedicine(Medicine medicine)
+        {
+            dbContext = new();
+            dbContext.Medicines.Update(medicine);
+            dbContext.SaveChanges();
+        }
     }
 }

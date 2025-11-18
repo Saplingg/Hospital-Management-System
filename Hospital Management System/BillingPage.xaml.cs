@@ -28,10 +28,13 @@ namespace Hospital_Management_System
 
         private void LoadPendingAppointments()
         {
+            // Chúng ta thêm điều kiện "&& a.Bill == null"
+            // Điều này có nghĩa là "chỉ lấy các lịch hẹn đã hoàn thành
+            // VÀ chưa có hóa đơn nào được tạo"
             var pendingAppointments = _context.Appointments
                 .Include(a => a.Patient)
                 .Include(a => a.Doctor)
-                .Where(a => a.Status == "Completed")
+                .Where(a => a.Status == "Completed" && a.Bill == null) // <-- SỬA Ở ĐÂY
                 .ToList();
 
             DgPendingAppointments.ItemsSource = pendingAppointments;
@@ -109,35 +112,59 @@ namespace Hospital_Management_System
 
             try
             {
+                // 1. Lấy đối tượng Bệnh nhân (đã có)
+                var patient = _selectedAppointment.Patient;
+
+                // 2. TÌM ĐỐI TƯỢNG NHÂN VIÊN (Staff) TỪ DB
+                // Đây là bước quan trọng bị thiếu
+                var staffUser = _context.Users.Find(STAFF_ID);
+                if (staffUser == null)
+                {
+                    MessageBox.Show($"Error: Staff user with ID {STAFF_ID} not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // 3. Tạo Hóa đơn mới
                 var newBill = new Bill
                 {
-                    AppointmentId = _selectedAppointment.AppointmentId,
-                    PatientId = _selectedAppointment.PatientId,
-                    StaffId = STAFF_ID,
                     TotalAmount = _totalAmount,
                     PaymentMethod = (CboPaymentMethod.SelectedItem as ComboBoxItem).Content.ToString(),
                     PaymentDate = System.DateTime.Now,
-                    Status = "Paid"
+                    Status = "Paid",
+
+                    // 4. Gán TẤT CẢ các đối tượng, KHÔNG gán Id
+                    Appointment = _selectedAppointment,
+                    Patient = patient,
+                    Staff = staffUser
                 };
 
+                // 5. Cập nhật trạng thái của Lịch hẹn
+                _selectedAppointment.Status = "Paid";
+
+                // 6. Thêm hóa đơn mới
                 _context.Bills.Add(newBill);
 
-                var appointmentToUpdate = _context.Appointments.Find(_selectedAppointment.AppointmentId);
-                if (appointmentToUpdate != null)
-                {
-                    appointmentToUpdate.Status = "Paid";
-                    _context.Appointments.Update(appointmentToUpdate);
-                }
-
+                // 7. Lưu tất cả thay đổi
                 _context.SaveChanges();
 
                 MessageBox.Show("Payment successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                // Tải lại danh sách chờ
                 LoadPendingAppointments();
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show($"Error processing payment: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                // TẠO MỘT THÔNG BÁO LỖI CHI TIẾT
+                string errorMessage = "Error processing payment:\n\n";
+                errorMessage += $"Message: {ex.Message}\n\n";
+
+                // Đây là phần quan trọng nhất để xem lỗi thật sự
+                if (ex.InnerException != null)
+                {
+                    errorMessage += $"Inner Exception: {ex.InnerException.Message}";
+                }
+
+                MessageBox.Show(errorMessage, "Detailed Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

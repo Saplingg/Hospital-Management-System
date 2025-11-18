@@ -19,5 +19,29 @@ namespace Hospital_Management_System.BLL
         {
             return medicineDAL.GetMedicineById(id);
         }
+        public void AddMedicine(Medicine m)
+        {
+            try
+            {
+                medicineDAL.AddMedicine(m);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý hoặc throw lại lỗi
+                throw new Exception("BLL Error adding medicine: " + ex.Message);
+            }
+        }
+        public void UpdateMedicine(Medicine m)
+        {
+            try
+            {
+                medicineDAL.UpdateMedicine(m);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý hoặc throw lại lỗi
+                throw new Exception("BLL Error updating medicine: " + ex.Message);
+            }
+        }
     }
 }

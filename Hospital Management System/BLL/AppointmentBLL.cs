@@ -32,5 +32,9 @@ namespace Hospital_Management_System.BLLL
         {
             return appointmentDAL.GetAllAppointments();
         }
+        public void AddAppointment(Appointment appointment)
+        {
+            appointmentDAL.AddAppointment(appointment);
+        }
     }
 }

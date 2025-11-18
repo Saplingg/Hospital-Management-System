@@ -20,5 +20,19 @@ namespace Hospital_Management_System.DAL
             }
             return prescriptions.Where(p => p.Medicine.MedicineName.Contains(s.Trim(),StringComparison.OrdinalIgnoreCase)).ToList();
         }
+        public void AddPrescription(PrescriptionDetail pd) {
+            dbContext.PrescriptionDetails.Add(pd);
+            dbContext.SaveChanges();
+        }
+        public void UpdatePrescription(PrescriptionDetail pd)
+        {
+            dbContext.PrescriptionDetails.Update(pd);
+            dbContext.SaveChanges();
+        }
+        public void DeletePrescription(PrescriptionDetail pd)
+        {
+            dbContext.PrescriptionDetails.Remove(pd);
+            dbContext.SaveChanges();
+        }
     }
 }

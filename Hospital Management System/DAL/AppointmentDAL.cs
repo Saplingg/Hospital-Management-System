@@ -59,5 +59,11 @@ namespace Hospital_Management_System.DAL
             List<Appointment> appointments = dbContext.Appointments.Include(a => a.Patient).ToList();
             return appointments;
         }
+        public void AddAppointment(Appointment appointment)
+        {
+            dbContext = new();
+            dbContext.Appointments.Add(appointment);
+            dbContext.SaveChanges();
+        }
     }
 }

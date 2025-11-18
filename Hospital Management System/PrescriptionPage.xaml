@@ -23,6 +23,9 @@
                 <Grid>
                     <TextBlock Margin="5 -10 0 10" Background="White" Width="Auto" HorizontalAlignment="Left">SEARCH BY NAME</TextBlock>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5" HorizontalAlignment="Left" Width="Auto">
+                        <Button Margin="5" Width="60" Click="Add_Click">Add</Button>
+                        <Button Margin="5" Width="60" Click="Update_Click">Update</Button>
+                        <Button Margin="5" Width="60" Click="Delete_Click">Delete</Button>
                         <TextBox x:Name="sSearch" Margin="10 5" Width="200" BorderThickness="2"/>
                         <Button Margin="5" Width="80" Click="Prescription_Loaded">Search</Button>
                         <Button Margin="5" Width="80" Click="btnClearSearch_Click">Clear Search</Button>
@@ -36,7 +39,7 @@
                         <DataGridTextColumn Header="Medicine Name" Width="2*" Binding="{Binding Medicine.MedicineName}" />
                         <DataGridTextColumn Header="Quantity" Width="*" Binding="{Binding Quantity}" />
                         <DataGridTextColumn Header="Dosage" Width="2*" Binding="{Binding Dosage}"/>
-                        <DataGridTextColumn Header="Subtotal" Width="*" Binding="{Binding Subtotal}" />
+                        <DataGridTextColumn Header="Subtotal" Width="*" Binding="{Binding SubTotal}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

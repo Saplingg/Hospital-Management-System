@@ -115,5 +115,16 @@ namespace Hospital_Management_System
                 asf.Show();
             }
         }
+
+        private void Appointment_Service_Add(object sender, RoutedEventArgs e)
+        {
+            AddAppointmentPage aap = new();
+            aap.Closed += (s, args) =>
+            {
+                FillAppointmentData();
+                this.Show();
+            };
+            aap.Show();
+        }
     }
 }

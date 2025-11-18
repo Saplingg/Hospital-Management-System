@@ -22,5 +22,9 @@ namespace Hospital_Management_System.DAL
             }
             return medicines;
         }
+        public Medicine GetMedicineById(int id) {
+            dbContext = new HospitalManagementDbContext();
+            return dbContext.Medicines.Find(id);
+        }
     }
 }

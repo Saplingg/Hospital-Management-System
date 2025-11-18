@@ -15,5 +15,17 @@ namespace Hospital_Management_System.BLL
         {
             return prescriptionDAL.GetAllPrescriptions(s);
         }
+        public void AddPrescription(PrescriptionDetail prescriptionDetail)
+        {
+            prescriptionDAL.AddPrescription(prescriptionDetail);
+        }
+        public void UpdatePrescription(PrescriptionDetail prescriptionDetail)
+        {
+            prescriptionDAL.UpdatePrescription(prescriptionDetail);
+        }
+        public void DeletePrescription(PrescriptionDetail prescriptionDetail)
+        {
+            prescriptionDAL.DeletePrescription(prescriptionDetail);
+        }
     }
 }

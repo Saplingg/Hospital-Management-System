@@ -15,5 +15,9 @@ namespace Hospital_Management_System.BLL
         {
             return medicineDAL.GetAllMedicines(s);
         }
+        public Medicine GetMedicineById(int id)
+        {
+            return medicineDAL.GetMedicineById(id);
+        }
     }
 }

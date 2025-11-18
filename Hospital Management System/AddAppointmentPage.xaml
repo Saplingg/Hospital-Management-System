@@ -1,0 +1,51 @@
+﻿<Window x:Class="Hospital_Management_System.AddAppointmentPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_Management_System"
+        mc:Ignorable="d"
+        Title="AddAppointmentPage" SizeToContent="Height" Width="400" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="MidnightBlue">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Foreground="white" Padding="0 15">MEDICAL RECORD</TextBlock>
+        </Grid>
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <TextBlock>Appointment ID:</TextBlock>
+            <TextBox Name="Id" Margin="10 0 10 5" Background="LightGray"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="2">
+            <TextBlock>Patient:</TextBlock>
+            <ComboBox Name="Patient" Margin="10 0 10 5"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="3">
+            <TextBlock>Doctor:</TextBlock>
+            <ComboBox Name="Doctor" Margin="10 0 10 5"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="4">
+            <TextBlock>Appointment Date:</TextBlock>
+            <DatePicker Name="ApDate" Margin="10 0 10 5"></DatePicker>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="5">
+            <TextBlock>Status:</TextBlock>
+            <ComboBox Name="st" Margin="10 0 10 5"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="6">
+            <TextBlock>Notes:</TextBlock>
+            <TextBox x:Name="Note" Height="50" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10 0 10 5"/>
+        </StackPanel>
+
+        <Button Grid.Row="7" Margin="10 15 10 5" Foreground="White" Background="Green" Click="Save_Click">Save</Button>
+    </Grid>
+</Window>

@@ -83,7 +83,7 @@ namespace Hospital_Management_System
                 MedicalRecord.DoctorNote = DoctorNote.Text;
                 medicalRecordBLL.UpdateMedicalRecord(MedicalRecord);
             }
-            MessageBox.Show("Updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
     }

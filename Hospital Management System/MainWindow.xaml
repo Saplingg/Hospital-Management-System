@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Hospital_Management_System.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Hospital Management" Height="713" Width="1127">
+        Title="Hospital Management" Height="713" Width="1127"
+        WindowStartupLocation="CenterScreen">
 
     <Grid>
         <DockPanel>
@@ -10,15 +11,16 @@
                 <TextBlock Text="HOSPITAL MANAGEMENT" Foreground="White" FontSize="13"
                            FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,20"/>
                 <Button x:Name="BtnPatients" Content="Patients" Margin="10" Click="BtnPatients_Click"/>
-                <Button x:Name="BtnDoctors" Content="Doctors" Margin="10" Click="BtnDoctors_Click"/>
+                <Button x:Name="BtnUsers" Content="Users" Margin="10" Click="BtnUsers_Click"/>
+                <Button x:Name="BtnMedicines" Content="Medicines" Margin="10" Click="BtnMedicines_Click"/>
                 <Button x:Name="BtnAppointments" Content="Appointments" Margin="10" Click="BtnAppointments_Click"/>
                 <Button x:Name="BtnBilling" Content="Billing" Margin="10" Click="BtnBilling_Click"/>
                 <Button x:Name="BtnLogout" Content="Logout" Margin="10" Click="BtnLogout_Click"/>
-
+ 
             </StackPanel>
 
             <!-- Khu hiển thị Page -->
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" Height="707" Width="990"/>
         </DockPanel>
     </Grid>
 </Window>

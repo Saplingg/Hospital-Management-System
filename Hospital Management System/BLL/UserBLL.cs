@@ -17,14 +17,33 @@ namespace Hospital_Management_System.BLL
         }
         public User? Login(string username, string password, string role)
         {   // Validation cơ bản
-            if (string.IsNullOrWhiteSpace(username) || 
-                string.IsNullOrWhiteSpace(password) || 
+            if (string.IsNullOrWhiteSpace(username) ||
+                string.IsNullOrWhiteSpace(password) ||
                 string.IsNullOrWhiteSpace(role))
 
                 return null;
 
             return _userDAL.GetUser(username, password, role);
         }
+        public List<User> GetAllUsers()
+        {
+            return _userDAL.GetAllUsers();
+        }
+        public void AddUser(User user)
+        {
+            // Bạn có thể thêm validation ở đây trước khi gọi DAL
 
+
+
+            _userDAL.AddUser(user);
+        }
+        public void DeleteUser(User user)
+        {
+            _userDAL.DeleteUser(user);
+        }
+        public void UpdateUser(User user)
+        {
+            _userDAL.UpdateUser(user);
+        }
     }
 }

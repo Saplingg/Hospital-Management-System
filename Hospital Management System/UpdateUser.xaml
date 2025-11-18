@@ -1,0 +1,68 @@
+﻿<Window x:Class="Hospital_Management_System.UpdateUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_Management_System"
+        mc:Ignorable="d"
+        Title="UpdateUser" Height="630" Width="450">
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+
+            <TextBlock Text="UPDATE USER"
+                       FontSize="24"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"
+                       FontWeight="Bold" />
+
+            <Label Content="Full Name:"/>
+            <TextBox x:Name="txtFullName"/>
+
+            <Label Content="Username:"/>
+            <TextBox x:Name="txtUsername"/>
+            
+
+            <Label Content="Password:"/>
+            <TextBox x:Name="txtPassword"/>
+
+            <Label Content="Role:"/>
+            <ComboBox x:Name="cbRole">
+                <ComboBoxItem Content="Admin"/>
+                <ComboBoxItem Content="Doctor"/>
+                <ComboBoxItem Content="Receptionist"/>
+                <ComboBoxItem Content="Accountant"/>
+            </ComboBox>
+
+            <Label Content="Gender:"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="rbMale" Content="Male" GroupName="gender"/>
+                <RadioButton x:Name="rbFemale" Content="Female" GroupName="gender" Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <Label Content="Phone:"/>
+            <TextBox x:Name="txtPhone"/>
+
+            <Label Content="Email:"/>
+            <TextBox x:Name="txtEmail" />
+
+            <Label Content="Specialization (For Doctor):"/>
+            <TextBox x:Name="txtSpec" Height="28"/>
+
+            <Label Content="Active:"/>
+            <CheckBox x:Name="chkActive" Content="Is Active" />
+
+        </StackPanel>
+
+        <Button Grid.Row="1"
+                Content="Update User"
+                Height="40"
+                Margin="0,20,0,0"
+                Click="BtnUpdate_Click"/>
+    </Grid>
+</Window>

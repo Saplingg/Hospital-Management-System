@@ -24,7 +24,7 @@ namespace Hospital_Management_System.DAL
             _context.Patients.Add(patient);
             _context.SaveChanges();
         }
-        public void RemovePatient(Patient patient)
+        public void DeletePatient(Patient patient)
         {
             _context.Patients.Remove(patient);
             _context.SaveChanges();

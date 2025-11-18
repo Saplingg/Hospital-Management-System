@@ -24,9 +24,10 @@ namespace Hospital_Management_System.BLL
         {
             _patientDAL.AddPatient(patient);
         }
-        public void RemovePatient(Patient patient)
+       public void DeletePatient(Patient patient)
         {
-            _patientDAL.RemovePatient(patient);
+            _patientDAL.DeletePatient(patient);
+           
         }
         public bool UpdatePatient(Patient patient)
         {

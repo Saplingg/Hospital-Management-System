@@ -19,10 +19,6 @@ namespace Hospital_Management_System.DAL
         {
             _context = new HospitalManagementDbContext();
         }
-        public List<Patient> GetAllPatients()
-        {
-            return _context.Patients.ToList();
-        }
         public void AddPatient(Patient patient)
         {
             _context.Patients.Add(patient);

@@ -12,10 +12,6 @@ namespace Hospital_Management_System.BLL
     {
         PatientDAL patientDAL = new PatientDAL();
         private readonly DAL.PatientDAL _patientDAL;
-        public List<Patient> GetAllPatients()
-        {
-            return patientDAL.GetAllPatients();
-            }
         public PatientBLL()
         {
             _patientDAL = new DAL.PatientDAL();

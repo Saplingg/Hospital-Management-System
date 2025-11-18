@@ -51,5 +51,13 @@ namespace Hospital_Management_System
             mrp.Show();
             parent.Close();
         }
+
+        private void Prescription_Page_Click(object sender, RoutedEventArgs e)
+        {
+            Window parent = Window.GetWindow(this);
+            PrescriptionPage pp = new();
+            pp.Show();
+            parent.Close();
+        }
     }
 }

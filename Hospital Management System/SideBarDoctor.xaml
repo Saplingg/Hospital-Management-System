@@ -1,10 +1,12 @@
 ﻿<UserControl x:Class="Hospital_Management_System.SideBarDoctor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Hospital_Management_System">
     <StackPanel Grid.Column="0" Background="#2C4058" Orientation="Vertical">
         <TextBlock Foreground="White" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0 15">HOSPITAL MANAGEMENT</TextBlock>
         <Button Margin="10" Click="Appointment_Page_Click">Appointments</Button>
         <Button Margin="10" Click="MedicalRecords_Page_Click">Medical Records</Button>
+        <Button Margin="10" Click="Prescription_Page_Click">Prescription</Button>
         <Button Margin="10" Click="Medicines_Page_Click">Medicines</Button>
         <Button Margin="10" Click="btnClose_Click">Logout</Button>
     </StackPanel>

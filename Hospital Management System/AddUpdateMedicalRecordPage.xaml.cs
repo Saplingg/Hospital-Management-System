@@ -34,12 +34,12 @@ namespace Hospital_Management_System
         {
             if (MedicalRecord != null)
             {
-                Id.Text = MedicalRecord.RecordId.ToString();
                 AppointmentId.ItemsSource = null;
                 AppointmentId.ItemsSource = appointmentBLL.GetAllAppointments();
                 AppointmentId.DisplayMemberPath = "AppointmentId";
                 AppointmentId.SelectedValuePath = "AppointmentId";
-                AppointmentId.Text=MedicalRecord.AppointmentId.ToString();
+                Id.Text = MedicalRecord.RecordId.ToString();
+                AppointmentId.Text = MedicalRecord.AppointmentId.ToString();
                 foreach (var item in appointmentBLL.GetAllAppointments())
                 {
                     if (item.AppointmentId == MedicalRecord.AppointmentId)
@@ -52,6 +52,13 @@ namespace Hospital_Management_System
                 DoctorNote.Text = MedicalRecord.DoctorNote;
                 AppointmentId.IsEnabled = false;
             }
+            else {
+                AppointmentId.ItemsSource = null;
+                AppointmentId.ItemsSource = appointmentBLL.GetAllAvaiableAppointments();
+                AppointmentId.DisplayMemberPath = "AppointmentId";
+                AppointmentId.SelectedValuePath = "AppointmentId";
+                AppointmentId.IsReadOnly = false;
+            }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -59,22 +66,10 @@ namespace Hospital_Management_System
             if (MedicalRecord == null)
             {
                 MedicalRecord = new MedicalRecord();
-                AppointmentId.ItemsSource = null;
-                AppointmentId.ItemsSource = appointmentBLL.GetAllAvaiableAppointments();
-                AppointmentId.DisplayMemberPath = "AppointmentId";
-                AppointmentId.SelectedValuePath = "AppointmentId";
                 AppointmentId.IsReadOnly = false;
-                foreach (var item in AppointmentId.Items)
-                {
-                    if (item.ToString() == AppointmentId.SelectedItem.ToString())
-                    {
-                        PatientName.Text = (item as Appointment).Patient.FullName;
-                        ApDate.Text = (item as Appointment).AppointmentDate.ToString("g");
-                    }
-                }
                 MedicalRecord.Diagnosis = Diagnosis.Text;
                 MedicalRecord.DoctorNote = DoctorNote.Text;
-                MedicalRecord.AppointmentId = int.Parse(AppointmentId.Text.Trim());
+                MedicalRecord.AppointmentId = int.Parse(AppointmentId.SelectedValue.ToString());
                 medicalRecordBLL.AddMedicalRecord(MedicalRecord);
             }
             else

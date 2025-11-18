@@ -36,8 +36,8 @@ namespace Hospital_Management_System
                 MessageBox.Show($" Welcome {user.FullName} ({user.Role})!",
                                 "Login Successful", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                //MainWindow main = new MainWindow(user.Role);
-                //main.Show();
+                MainWindow main = new MainWindow(user.Role);
+                main.Show();
                 if (user.Role == "Doctor") { 
                     AppointmentPage appointmentPage = new AppointmentPage();
                     appointmentPage.Show();

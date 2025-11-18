@@ -22,7 +22,7 @@ namespace Hospital_Management_System
     /// <summary>
     /// Interaction logic for AppointmentPage.xaml
     /// </summary>
-    public partial class AppointmentPage : Window
+    public partial class AppointmentPage : Page
     {
         AppointmentBLL appointmentBLL = new();
         PatientBLL patientBLL = new();

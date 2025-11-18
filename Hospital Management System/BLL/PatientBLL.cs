@@ -1,4 +1,5 @@
-﻿using Hospital_Management_System.Models;
+﻿using Hospital_Management_System.DAL;
+using Hospital_Management_System.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Hospital_Management_System.BLL
 {
     public class PatientBLL
     {
+        PatientDAL patientDAL = new PatientDAL();
         private readonly DAL.PatientDAL _patientDAL;
         public PatientBLL()
         {

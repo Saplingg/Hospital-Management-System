@@ -7,31 +7,24 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System.DAL
 {
-    public class MedicineDAL
+    class MedicineDAL
     {
-        private readonly HospitalManagementDbContext _context;
-        public MedicineDAL()
+        HospitalManagementDbContext dbContext;
+
+
+        public List<Medicine> GetAllMedicines(string s)
         {
-            _context = new HospitalManagementDbContext();
+            dbContext = new HospitalManagementDbContext();
+            List<Medicine> medicines = dbContext.Medicines.ToList();
+            if (!string.IsNullOrEmpty(s))
+            {
+                return medicines.Where(m => m.MedicineName.Contains(s.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            return medicines;
         }
-        public List<Medicine> GetAllMedicines()
-        {
-            return _context.Medicines.ToList();
-        }
-        public void AddMedicine(Medicine medicine)
-        {
-            _context.Medicines.Add(medicine);
-            _context.SaveChanges();
-        }
-        public void DeleteMedicine(Medicine medicine)
-        {
-            _context.Medicines.Remove(medicine);
-            _context.SaveChanges();
-        }
-        public void UpdateMedicine(Medicine medicine)
-        {
-            _context.Medicines.Update(medicine);
-            _context.SaveChanges();
+        public Medicine GetMedicineById(int id) {
+            dbContext = new HospitalManagementDbContext();
+            return dbContext.Medicines.Find(id);
         }
     }
 }

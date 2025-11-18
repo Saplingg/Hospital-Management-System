@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_Management_System"
         mc:Ignorable="d"
-        Title="AppointmentPage" Height="450" Width="800">
+        Title="AppointmentPage" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Appointment_Loaded" WindowState="Maximized">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6.2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <local:SideBarDoctor/>
+        </Grid>
+        <Grid Margin="5" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" >APPOINTMENT MANAGEMENT</TextBlock>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0 10" HorizontalAlignment="Left" Width="Auto">
+                <Button Margin="5" Width="80" Click="Appointment_Service_Add">Add</Button>
+                <Button Margin="5" Width="80" Click="Appointment_Service_View">View Service</Button>
+                <Button Margin="5" Width="80" Click="Update_Click">Update</Button>
+                <TextBox x:Name="sSearch" Margin="10 5" Width="200" BorderThickness="2"/>
+                <Button Margin="5" Width="80" Click="FilterSetup">Search</Button>
+                <Button Margin="5" Width="80" Click="btnClearSearch_Click">Clear Search</Button>
+            </StackPanel>
+            <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="5 0 5 5">
+                <Grid>
+                    <TextBlock Margin="5 -10 0 10" Background="White" Width="Auto" HorizontalAlignment="Left">FILTER</TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Margin="15 8">
+                        <TextBlock VerticalAlignment="Center" Margin="10 0">Phone:</TextBlock>
+                        <TextBox Name="ftPhone" Width="100" VerticalAlignment="Center"></TextBox>
+                        <TextBlock VerticalAlignment="Center" Margin="10 0">Status:</TextBlock>
+                        <ComboBox Name="ftStatus" Width="80"></ComboBox>
+                        <TextBlock VerticalAlignment="Center" Margin="10 0">Appointment Date:</TextBlock>
+                        <DatePicker Name="ftDate" Width="120"></DatePicker>
+                        <Button Margin="10 0" Width="80" Click="btnClearFilter_Click">Clear Filter</Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Row="3" Margin="5">
+                <DataGrid x:Name="dgAppointment" AutoGenerateColumns="False" IsReadOnly="True" Margin="0" Grid.Column="0" RowHeaderWidth="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding AppointmentId}" />
+                        <DataGridTextColumn Header="Patient" Width="2*" Binding="{Binding Patient.FullName}" />
+                        <DataGridTextColumn Header="Gender" Width="2*" Binding="{Binding Patient.Gender}" />
+                        <DataGridTextColumn Header="Date of birth" Width="2*" Binding="{Binding Patient.Dob}"/>
+                        <DataGridTextColumn Header="Phone" Width="2*" Binding="{Binding Patient.Phone}" />
+                        <DataGridTextColumn Header="Address" Width="1*" Binding="{Binding Patient.Address}"/>
+                        <DataGridTextColumn Header="Appointment Date" Width="3*" Binding="{Binding AppointmentDate}"/>
+                        <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
+                        <DataGridTextColumn Header="Notes" Width="2*" Binding="{Binding Notes}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -9,14 +9,15 @@ namespace Hospital_Management_System.DAL
 {
     public class PatientDAL
     {
+        HospitalManagementDbContext dbContext = new HospitalManagementDbContext();
+        public List<Patient> GetAllPatients()
+        {
+            return dbContext.Patients.ToList();
+        }
         private readonly HospitalManagementDbContext _context;
         public PatientDAL()
         {
             _context = new HospitalManagementDbContext();
-        }
-        public List<Patient> GetAllPatients()
-        {
-            return _context.Patients.ToList();
         }
         public void AddPatient(Patient patient)
         {

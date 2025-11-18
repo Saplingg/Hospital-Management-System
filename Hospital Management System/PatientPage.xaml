@@ -27,56 +27,7 @@
                    HorizontalAlignment="Center"
                    Margin="0,0,0,15"/>
 
-        <!-- ====== FORM ====== -->
-        <Grid Grid.Row="1" Margin="0,0,0,15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="150"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- FULL NAME -->
-            <StackPanel Grid.Column="0" Margin="5">
-                <Label Content="Full Name:"/>
-                <TextBox x:Name="txtFullName"/>
-            </StackPanel>
-
-            <!-- GENDER -->
-            <StackPanel Grid.Column="1" Margin="5">
-                <Label Content="Gender:"/>
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="rbMale" Content="Male" GroupName="GenderGroup" Margin="5,0"/>
-                    <RadioButton x:Name="rbFemale" Content="Female" GroupName="GenderGroup" Margin="5,0"/>
-                </StackPanel>
-            </StackPanel>
-
-            <!-- DOB -->
-            <StackPanel Grid.Column="2" Margin="5">
-                <Label Content="Date of Birth:"/>
-                <DatePicker x:Name="dpDOB"/>
-            </StackPanel>
-
-            <!-- PHONE -->
-            <StackPanel Grid.Column="3" Margin="5">
-                <Label Content="Phone:"/>
-                <TextBox x:Name="txtPhone"/>
-            </StackPanel>
-
-            <!-- ADDRESS -->
-            <StackPanel Grid.Column="4" Margin="5">
-                <Label Content="Address:"/>
-                <TextBox x:Name="txtAddress"/>
-            </StackPanel>
-
-            <!-- INSURANCE -->
-            <StackPanel Grid.Column="5" Margin="5">
-                <Label Content="Insurance No:"/>
-                <TextBox x:Name="txtInsurance"/>
-            </StackPanel>
-        </Grid>
+        
 
         <!-- ====== BUTTONS ====== -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
@@ -95,7 +46,7 @@
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   SelectionMode="Single"
-                  SelectionChanged="DgPatients_SelectionChanged">
+                 >
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding PatientId}" Width="60"/>
@@ -104,7 +55,7 @@
                 <DataGridTextColumn Header="DOB" Binding="{Binding Dob, StringFormat=\{0:dd/MM/yyyy\}}" Width="120"/>
                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="120"/>
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="250"/>
-                <DataGridTextColumn Header="Insurance" Binding="{Binding InsuranceNumber}" Width="120"/>
+                <DataGridTextColumn Header="Insurance" Binding="{Binding InsuranceNumber}" Width="190"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -22,19 +22,22 @@ namespace Hospital_Management_System
             switch (role)
             {
                 case "Receptionist":
-                    BtnDoctors.Visibility = Visibility.Collapsed;
+                   
                     BtnBilling.Visibility = Visibility.Collapsed;
+                    BtnUsers.Visibility = Visibility.Collapsed;
                     break;
 
                 case "Doctor":
                     BtnPatients.Visibility = Visibility.Collapsed;
                     BtnBilling.Visibility = Visibility.Collapsed;
+                    
                     break;
 
                 case "Accountant":
                     BtnPatients.Visibility = Visibility.Collapsed;
-                    BtnDoctors.Visibility = Visibility.Collapsed;
+                    
                     BtnAppointments.Visibility = Visibility.Collapsed;
+                    BtnUsers.Visibility = Visibility.Collapsed;
                     break;
 
                 case "Admin":
@@ -44,8 +47,13 @@ namespace Hospital_Management_System
         }
 
         private void BtnPatients_Click(object sender, RoutedEventArgs e)
-            => MainFrame.Content = new PatientPage();
+            { 
+         MainFrame.Content = new PatientPage();
+            }
 
+        private void BtnUsers_Click(object sender, RoutedEventArgs e)
+        {   MainFrame.Content = new UserPage();
+        }
         private void BtnDoctors_Click(object sender, RoutedEventArgs e)
             => MainFrame.Content = new DoctorPage();
 
@@ -59,6 +67,16 @@ namespace Hospital_Management_System
         {
             new LoginPage().Show();
             this.Close();
+        }
+
+        private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+
+        }
+
+        private void BtnMedicines_Click(object sender, RoutedEventArgs e)
+        {            
+                MainFrame.Content = new MedicinePage();           
         }
     }
 }

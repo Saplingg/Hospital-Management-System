@@ -7,32 +7,31 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System.DAL
 {
-    public class PatientDAL
+    public class MedicineDAL
     {
         private readonly HospitalManagementDbContext _context;
-        public PatientDAL()
+        public MedicineDAL()
         {
             _context = new HospitalManagementDbContext();
         }
-        public List<Patient> GetAllPatients()
+        public List<Medicine> GetAllMedicines()
         {
-            return _context.Patients.ToList();
+            return _context.Medicines.ToList();
         }
-        public void AddPatient(Patient patient)
+        public void AddMedicine(Medicine medicine)
         {
-            _context.Patients.Add(patient);
+            _context.Medicines.Add(medicine);
             _context.SaveChanges();
         }
-        public void DeletePatient(Patient patient)
+        public void DeleteMedicine(Medicine medicine)
         {
-            _context.Patients.Remove(patient);
+            _context.Medicines.Remove(medicine);
             _context.SaveChanges();
         }
-        public bool UpdatePatient(Patient patient)
+        public void UpdateMedicine(Medicine medicine)
         {
-            _context.Patients.Update(patient);
-            return _context.SaveChanges() > 0;
-
+            _context.Medicines.Update(medicine);
+            _context.SaveChanges();
         }
     }
 }

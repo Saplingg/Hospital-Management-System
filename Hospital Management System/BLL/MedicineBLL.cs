@@ -43,5 +43,21 @@ namespace Hospital_Management_System.BLL
                 throw new Exception("BLL Error updating medicine: " + ex.Message);
             }
         }
+        public void DeleteMedicine(Medicine m)
+        {
+            try
+            {
+                medicineDAL.DeleteMedicine(m);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý hoặc throw lại lỗi
+                throw new Exception("BLL Error deleting medicine: " + ex.Message);
+            }
+        }
+        public List<Medicine> GetAllMedicines()
+        {
+            return medicineDAL.GetAllMedicines();
+        }
     }
 }

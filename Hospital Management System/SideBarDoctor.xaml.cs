@@ -34,13 +34,15 @@ namespace Hospital_Management_System
         private void Medicines_Page_Click(object sender, RoutedEventArgs e)
         {
             Window parent = Window.GetWindow(this);
-            MedicinePage mp = new();
+            MedicinePage1 mp = new();
             mp.Show();
             parent.Close();
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Window parent = Window.GetWindow(this);
+            LoginPage lp = new();
+            lp.Show();
             parent.Close();
         }
 

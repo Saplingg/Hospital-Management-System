@@ -41,6 +41,8 @@ namespace Hospital_Management_System
                     break;
 
                 case "Admin":
+                    BtnAppointments.Visibility = Visibility.Collapsed;
+                    break;
                 default:
                     break;
             }

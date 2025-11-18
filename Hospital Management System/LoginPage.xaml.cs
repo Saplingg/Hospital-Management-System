@@ -8,16 +8,16 @@ namespace Hospital_Management_System
     {
         private readonly UserBLL _userBLL;
         public LoginPage()
-            
+
         {
             InitializeComponent();
             _userBLL = new UserBLL();
         }
-        
+
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            
+
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Password.Trim();
             string role = (cbRole.SelectedItem as ComboBoxItem)?.Content.ToString();
@@ -36,11 +36,16 @@ namespace Hospital_Management_System
                 MessageBox.Show($" Welcome {user.FullName} ({user.Role})!",
                                 "Login Successful", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                MainWindow main = new MainWindow(user.Role);
-                main.Show();
-                if (user.Role == "Doctor") { 
+                if (user.Role == "Doctor")
+                {
                     AppointmentPage appointmentPage = new AppointmentPage();
                     appointmentPage.Show();
+                }
+                else
+                {
+
+                    MainWindow main = new MainWindow(user.Role);
+                    main.Show();
                 }
                 this.Close();
             }

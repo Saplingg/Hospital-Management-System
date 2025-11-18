@@ -22,6 +22,11 @@ namespace Hospital_Management_System.DAL
             }
             return medicines;
         }
+        public List<Medicine> GetAllMedicines()
+        {
+            dbContext = new HospitalManagementDbContext();
+            return dbContext.Medicines.ToList();
+        }
         public Medicine GetMedicineById(int id) {
             dbContext = new HospitalManagementDbContext();
             return dbContext.Medicines.Find(id);
@@ -35,6 +40,12 @@ namespace Hospital_Management_System.DAL
         {
             dbContext = new();
             dbContext.Medicines.Update(medicine);
+            dbContext.SaveChanges();
+        }
+        public void DeleteMedicine(Medicine medicine)
+        {
+            dbContext = new();
+            dbContext.Medicines.Remove(medicine);
             dbContext.SaveChanges();
         }
     }

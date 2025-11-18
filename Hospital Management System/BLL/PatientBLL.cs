@@ -8,12 +8,33 @@ using System.Threading.Tasks;
 
 namespace Hospital_Management_System.BLL
 {
-    class PatientBLL
+    public class PatientBLL
     {
         PatientDAL patientDAL = new PatientDAL();
+        private readonly DAL.PatientDAL _patientDAL;
         public List<Patient> GetAllPatients()
         {
             return patientDAL.GetAllPatients();
+            }
+        public PatientBLL()
+        {
+            _patientDAL = new DAL.PatientDAL();
+        }
+        public List<Patient> GetAllPatients()
+        {
+            return _patientDAL.GetAllPatients();
+        }
+        public void AddPatient(Patient patient)
+        {
+            _patientDAL.AddPatient(patient);
+        }
+        public void RemovePatient(Patient patient)
+        {
+            _patientDAL.RemovePatient(patient);
+        }
+        public bool UpdatePatient(Patient patient)
+        {
+            return _patientDAL.UpdatePatient(patient);
         }
     }
 }

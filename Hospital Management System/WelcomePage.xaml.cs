@@ -10,18 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital_Management_System
 {
     /// <summary>
-    /// Interaction logic for DoctorPage.xaml
+    /// Interaction logic for WelcomePage.xaml
     /// </summary>
-    public partial class DoctorPage : Page
+    public partial class WelcomePage : Page
     {
-        public DoctorPage()
+        public WelcomePage( string role)
         {
             InitializeComponent();
+            txtWelcome.Text = $"WELCOME, {role.ToUpper()}";
         }
     }
 }

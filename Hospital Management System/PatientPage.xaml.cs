@@ -31,8 +31,8 @@ namespace Hospital_Management_System
 
         private void LoadPatient()
         {
-            var patietns = patientBLL.GetAllPatients();
-            dgPatients.ItemsSource = patietns;
+            var patients = patientBLL.GetAllPatients();
+            dgPatients.ItemsSource = patients;
 
 
 
@@ -40,145 +40,44 @@ namespace Hospital_Management_System
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            // ========== 1. Full Name ==========
-            if (string.IsNullOrWhiteSpace(txtFullName.Text))
-            {
-                MessageBox.Show("Full Name is required!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtFullName.Focus();
-                return;
-            }
-
-            // ========== 2. Gender ==========
-            if (!(rbMale.IsChecked == true || rbFemale.IsChecked == true))
-            {
-                MessageBox.Show("Please select gender!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // ========== 3. Date of Birth ==========
-            if (dpDOB.SelectedDate == null)
-            {
-                MessageBox.Show("Please select Date of Birth!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (dpDOB.SelectedDate > DateTime.Now)
-            {
-                MessageBox.Show("Date of Birth cannot be in the future!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // ========== 4. Phone ==========
-            if (string.IsNullOrWhiteSpace(txtPhone.Text))
-            {
-                MessageBox.Show("Phone number is required!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtPhone.Focus();
-                return;
-            }
-
-            if (!txtPhone.Text.All(char.IsDigit))
-            {
-                MessageBox.Show("Phone number must contain only digits!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtPhone.Focus();
-                return;
-            }
-
-            if (txtPhone.Text.Length < 9 || txtPhone.Text.Length > 12)
-            {
-                MessageBox.Show("Phone number must be 9–12 digits!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtPhone.Focus();
-                return;
-            }
-
-            // ========== 5. Address ==========
-            if (string.IsNullOrWhiteSpace(txtAddress.Text))
-            {
-                MessageBox.Show("Address is required!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtAddress.Focus();
-                return;
-            }
-
-            // ========== 6. Insurance No (Optional) ==========
-            // Cho phép để trống nhưng nếu nhập -> check format
-            if (!string.IsNullOrWhiteSpace(txtInsurance.Text))
-            {
-                if (txtInsurance.Text.Length < 6)
-                {
-                    MessageBox.Show("Insurance number must be at least 6 characters!", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-            }
-
-            // ===========================
-            // Nếu qua hết validate → Add
-            // ===========================
-
-            Patient p = new Patient
-            {
-                FullName = txtFullName.Text.Trim(),
-                Gender = rbMale.IsChecked == true ? "Male" : "Female",
-                Dob = dpDOB.SelectedDate ?? DateTime.Now,
-                Phone = txtPhone.Text.Trim(),
-                Address = txtAddress.Text.Trim(),
-                InsuranceNumber = txtInsurance.Text.Trim()
-            };
-
-            patientBLL.AddPatient(p);
-
-            MessageBox.Show("Patient added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            LoadPatient();
-            ClearForm();
+         AddPatient addForm = new AddPatient();
+        addForm.ShowDialog();
+            LoadPatient(); // load lại sau khi thêm
         }
 
-        private void ClearForm()
-        {
-            txtAddress.Clear();
-            txtFullName.Clear();
-            txtInsurance.Clear();
-            txtPhone.Clear();
-            dpDOB.SelectedDate = null;
-            rbMale.IsChecked = false;
-            rbFemale.IsChecked = false;
-
-        }
+ 
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(dgPatients.SelectedItems != null)
-            {   var patients = dgPatients.SelectedItem as Patient;
-
-                txtAddress.Text = patients.Address;
-                txtFullName.Text = patients.FullName;
-                txtInsurance.Text = patients.InsuranceNumber;
-                txtPhone.Text = patients.Phone;
-                dpDOB.SelectedDate = patients.Dob;
-                rbMale.IsChecked = patients.Gender=="Male";
-                rbFemale.IsChecked = patients.Gender =="Female";
-
+            
+            var selectedPatient = dgPatients.SelectedItem as Patient;
+            if (selectedPatient != null)
+            {
+                UpdatePatients updateForm = new UpdatePatients(selectedPatient);
+                updateForm.ShowDialog();
+                LoadPatient(); // load lại sau khi sửa
             }
             else
             {
-                MessageBox.Show("Please select a patient to edit.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("⚠ Please select a patient to edit.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if(dgPatients.SelectedItems != null)
+           Patient selectedPatient = dgPatients.SelectedItem as Patient;
+            if (selectedPatient == null)
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the selected patient?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    var selectedPatient = dgPatients.SelectedItem as Patient;
-                    patientBLL.RemovePatient(selectedPatient);
-                    MessageBox.Show("Patient deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    LoadPatient();
-                }
-               
+                MessageBox.Show("⚠ Please select a patient to delete.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-            else             {
-                MessageBox.Show("Please select a patient to delete.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            var result = MessageBox.Show($" Are you sure you want to delete patient: {selectedPatient.FullName} ?",
+                                         "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                patientBLL.DeletePatient(selectedPatient);
+                MessageBox.Show(" Patient deleted successfully.", "Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadPatient(); // refresh lại danh sách
             }
         }
 
@@ -198,10 +97,7 @@ namespace Hospital_Management_System
 
         }
 
-        private void DgPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
 
 
 
